@@ -1,0 +1,131 @@
+﻿@model IEnumerable<EventManagementSystem.Models.EventDetails>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Events</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    <input type="button" onclick="viewDetail(@item.EventId)" value="Details" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<partial></partial>
+
+
+
+<div id="partialModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">@*
+                <h5 class="modal-title">Customer Details Form</h5>
+                <button type="button" class="close" data-dismiss="modal"  aria-label="Close">
+                    
+                </button>*@
+                <h3 class="modal-title">Customer Details Form</h3>
+                <button type="button" class="btn btn-close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
+                    <span  aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="container  card col-md-11">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-outline">
+                            <label class="form-label fw-bold" id="eventtitle"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-outline">
+                            <label class="form-label fw-bold" id="eventdescription"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-outline">
+                            <label class="form-label fw-bold" id="eventauther"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-outline">
+                            <label class="form-label fw-bold" id="eventdate"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*<div id="partialModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Customer Details Form</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@section Scripts {
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="~/js/event.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,38 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.hide{
+    display:none;
+}
+
+.navbar {
+    background-color: #307c8f;
+}
+
+    .navbar a {
+        color: white !important;
+    }
+
+.navbar-toggler-icon {
+    color: white !important;
+}
+
+.container-fluid {
+    margin-left: 10px;
+}

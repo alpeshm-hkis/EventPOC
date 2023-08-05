@@ -1,0 +1,98 @@
+﻿@model IEnumerable<EventManagementSystem.Models.Comments>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div id="ulCommentList" class="bg-light overflow-auto" style="max-width: 100%; max-height: 300px;">
+
+    @if (@Model.Count() > 0)
+    {
+        @foreach (var item in Model)
+        {
+            @*<div class="card">
+    <div>
+    @Html.DisplayFor(modelItem => item.Description)
+    </div>*@
+            @*<div>
+    @Html.DisplayFor(modelItem => item.Date)
+    </div>*@
+            @*</div>*@
+
+
+            <div class="row d-flex justify-content-center p-1 col-lg-12">
+                <div class="col-md-8 col-lg-10">
+                    <div class="card shadow-0 border" style="background-color: #d8e9f1;">
+                        <div class="card-body p-4">
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    }
+    else
+    {
+        <div></div>
+    }
+
+
+</div>
+<div class="container">
+    <div class="row col-md-8">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-8">
+                <div class="form-outline">
+                    <input type="text" id="newComment" class="form-control form-control-lg" placeholder="Type comment..." fdprocessedid="rigypq">
+                </div>
+            </div>
+            <div class="form-outline">
+                <button type="button" class="btn btn-primary" onclick="addComment()"><i class="fa fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*<ul id="ulCommentList">
+
+    @if (@Model.Count() > 0)
+    {
+        @foreach (var item in Model)
+        {
+            <li>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+
+        <li></li>
+    }
+
+
+</ul>
+<div>
+    <input type="text" id="newComment"/>
+    <input type="button" value="Send" onclick="addComment()" />
+</div>*@
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="~/js/event.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

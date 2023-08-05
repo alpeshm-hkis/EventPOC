@@ -1,0 +1,16 @@
+﻿.cards {
+    background-color: #effdff;
+    border-radius: 10px;
+    padding: 2% 2%;
+    box-shadow: 0 0 10px #e1e1e1;
+}
+.event {
+    background-color: #effdff;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 0 10px #e1e1e1;
+}
+
+#partialModal{
+    overflow:hidden;
+}
