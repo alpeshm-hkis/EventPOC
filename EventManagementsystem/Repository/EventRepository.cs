@@ -69,12 +69,12 @@ namespace EventManagementSystem.Repository
             }
         }
 
-        public void AddEventComments(string id, string comment)
+        public void AddEventComments(string id, string comment, int userId)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@eventId", Convert.ToInt32(id), DbType.Int32, ParameterDirection.Input);
             parameter.Add("@comment", comment, DbType.String, ParameterDirection.Input);
-            parameter.Add("@userId", 0, DbType.String, ParameterDirection.Input);          
+            parameter.Add("@userId", userId, DbType.String, ParameterDirection.Input);          
 
             using (IDbConnection connection = GetDbConnection())
             {

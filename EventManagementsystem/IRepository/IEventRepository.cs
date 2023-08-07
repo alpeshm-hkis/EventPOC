@@ -8,7 +8,7 @@ namespace EventManagementSystem.IRepository
 
         List<EventDetails> GetEventDetailsList(int isPublic, int type, int userId);
         List<Comments> GetEventComments(string id);
-        void AddEventComments(string id, string comment);
+        void AddEventComments(string id, string comment, int userId);
         void DeleteEvent(int id);
         EventDetails GetEventDetailById(int eventId);
     }

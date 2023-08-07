@@ -30,9 +30,9 @@ namespace EventManagementSystem.Service
             return commentList;
         }
 
-        public void AddEventComments(string id, string comment)
+        public void AddEventComments(string id, string comment, int userId)
         {
-            _eventDetailRepository.AddEventComments(id, comment);
+            _eventDetailRepository.AddEventComments(id, comment,userId);
         }
 
         public void DeleteEvent(int id)

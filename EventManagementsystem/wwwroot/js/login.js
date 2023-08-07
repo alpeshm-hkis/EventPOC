@@ -15,13 +15,46 @@ function getUserModel() {
 }
 
 function registerUser(user) {
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     user.firstName = $('#firstname').val();
     user.lastName = $('#lastname').val();
     user.email = $('#email').val();
     user.password = $('#password').val();
     user.mobile = $('#mobile').val();
-    user.gender = $('input[name=Gender]:checked').val()
-    debugger
+    user.gender = $('input[name=Gender]:checked').val();
+    var validationMsg = "";
+    debugger;
+    if (user.firstName == "") {
+        validationMsg = "First Name";
+    }
+    if (user.lastName == "") {
+        if (validationMsg.length > 1) {
+            validationMsg += ", ";
+        }
+        validationMsg += "Last Name";
+    }
+    if (user.email == '' && !user.email.match(validRegex)) {
+        if (validationMsg.length > 1) {
+            validationMsg += ", ";
+        }
+        validationMsg += "Email";
+    }
+    if (user.password == '' || user.password.length < 1) {
+        if (validationMsg.length > 1) {
+            validationMsg += ", ";
+        }
+        validationMsg += "Password";
+    }
+    if (user.mobile == '' || user.mobile.length < 10 || user.mobile.length > 10) {
+        if (validationMsg.length > 1) {
+            validationMsg += ", ";
+        }
+        validationMsg += "Mobile";
+    }
+    if (validationMsg.length > 1) {
+        alert("Please enter valid " + validationMsg + ". this all are required fields");
+        return false;
+    }
     $.ajax({
         url: "RegisterUser",
         type: "POST",
@@ -29,7 +62,7 @@ function registerUser(user) {
         dataType: "json",
         cache: false,
         success: function (dataResult) {
-            Response.redirect('index.cshtml');
+            window.location.href = "/event/UserEventList?type=" + 1;
         }
     });
 }
@@ -45,6 +78,7 @@ function emailValidate() {
         cache: false,
         success: function (dataResult) {
             if (dataResult == true) {
+                alert("This email address is already exist! Try another email.");
                 return false;
             }
             getUserModel();
@@ -53,7 +87,6 @@ function emailValidate() {
 }
 
 function LoginUser() {
-    debugger;
     var email = $('#email').val();
     var password = $('#password').val();
     $.ajax({
@@ -63,7 +96,6 @@ function LoginUser() {
         success: function (data) {
             debugger
             if (data != undefined) {
-                Response.redirect('event/index');
                 window.location.href = "/event/UserEventList?type="+1;
             } else {
                 alert("enter valid email and password")
@@ -71,3 +103,4 @@ function LoginUser() {
         }
     });
 }
+

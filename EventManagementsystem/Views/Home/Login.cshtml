@@ -5,40 +5,50 @@
 }
 
 <div>
+
     <div>
-        <h1>Login</h1>
-    </div>
-    <div>
-        <section>
-            <div class="container-fluid h-custom">
+        <section class="login-page">
+            <div class="login-content h-custom">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-md-9 col-lg-6 col-xl-5">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                              class="img-fluid" alt="Sample image">
                     </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 cards">
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 ">
+                        <div>
+                            <h1 class="login-title">Login</h1>
+                        </div>
                         <form>
                             <div class="form-outline mb-4">
                                 <label class="form-label fw-bold" for="email">Email address</label>
-                                <input type="email" name="email" id="email" class="form-control form-control-lg"
+                                <input type="email" name="email" id="email" class="form-control form-control-md"
                                        placeholder="Enter a valid email address" />
                             </div>
 
                             <div class="form-outline mb-3">
                                 <label class="form-label fw-bold" for="password">Password</label>
-                                <input type="password" name="password" id="password" class="form-control form-control-lg"
+                                <input type="password" name="password" id="password" class="form-control form-control-md"
                                        placeholder="Enter password" />
                             </div>
 
 
-                            <div class="text-center text-lg-start mt-4 pt-2 d-flex flex-column align-items-center">
-                                <button type="button" onclick="LoginUser()" class="btn btn-primary btn-lg"
+                            <div class="text-center text-lg-start mt-4 pt-2 d-flex flex-column">
+                                <div class="d-flex justify-content-between">
+                                <button type="button" onclick="LoginUser()" class="login-button btn btn-primary btn-lg"
                                         style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                                    Login
+                                    Sign In
                                 </button>
+                                <a asp-action="Index">
+                                <button type="button"  class="skip-button btn btn-light btn-lg"
+                                         style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                                         
+                                    Skip
+                                </button>
+                                </a>
+                                </div>
                                 <p class="small fw-bold mt-2 pt-1 mb-0">
-                                    Don't have an account? <a asp-action="Signup"
-                                                              class="link-danger">Register</a>
+                                    Don't have an account? <a asp-action="Signup" style="color: #307c8f"
+                                                              class="">Sign Up</a>
                                 </p>
                             </div>
                         </form>
@@ -46,21 +56,6 @@
                 </div>
             </div>
         </section>
-
-
-        @*<form class="form-control">
-            <div>
-                <label class="form-label">Email: </label>
-                <input class="form-control" type="email" name="email" id="email" />
-            </div>
-            <div>
-                <label class="form-label">Password: </label>
-                <input class="form-control" type="password" name="password" id="password" />
-            </div>
-            <div>
-                <button class="btn-primary" onclick="LoginUser()">Login</button>
-            </div>
-        </form>*@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>

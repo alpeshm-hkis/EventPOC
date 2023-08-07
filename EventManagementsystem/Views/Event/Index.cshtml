@@ -4,55 +4,54 @@
     ViewData["Title"] = "Index";
 }
 
-<h4>Add Event</h4>
-<hr />
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-<hr/>
-<section>
+<section class="add-event-container">
     <div class="container-fluid h-custom d-flex justify-content-center">
         <div class="row col-md-7 event">
-            <h1 class="mb-3 text-center">Event Details</h1>
+            <h1 class="mb-3 text-center add-title"> Add Event</h1>
             <form asp-action="AddEvent" method="post" >
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group hide">
                     <label asp-for="EventId" class="form-label fw-bold"></label>
-                    <input asp-for="EventId" class="form-control form-control-lg" placeholder="Enter EventId" />
+                    <input asp-for="EventId" class="form-control form-control-md" placeholder="Enter EventId" />
                     <span asp-validation-for="EventId" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
                     <label asp-for="Title" class="form-label fw-bold"></label>
-                    <input asp-for="Title" class="form-control form-control-lg" placeholder="Enter Title" />
+                    <input asp-for="Title" class="form-control form-control-md" placeholder="Enter Title" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
                     <label asp-for="Description" class="form-label fw-bold"></label>
-                    <textarea asp-for="Description" class="form-control form-control-lg" placeholder="Enter Description"></textarea>
+                    <textarea asp-for="Description" class="form-control form-control-md" placeholder="Enter Description"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
                     <label asp-for="Duration" class="form-label fw-bold"></label>
-                    <input asp-for="Duration" class="form-control form-control-lg" placeholder="Enter Duration" />
+                    <input asp-for="Duration" type="number" class="form-control form-control-md" placeholder="Enter Duration" />
                     <span asp-validation-for="Duration" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label fw-bold">DateTime</label>
-                    <input asp-for="StartDate" type="datetime-local" class="form-control form-control-lg" />
+                    <input asp-for="StartDate" type="datetime-local" class="form-control form-control-md" />
                     <span asp-validation-for="StartDate" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
                     <label asp-for="Location" class="form-label fw-bold">Location</label>
-                    <input asp-for="Location" placeholder="Location" class="form-control form-control-lg" />
+                    <input asp-for="Location" placeholder="Location" class="form-control form-control-md" />
                     <span asp-validation-for="Location" class="text-danger"></span>
                 </div>
                 <div class="row">
                     <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IsPublic" /> @Html.DisplayNameFor(model => model.IsPublic)
+                        <input class="form-check-input" asp-for="IsPublic" /> <lable> Make it Public?</lable>
                     </label>
                 </div>
-                <div class="form-group d-flex justify-content-center">
-                    <input type="submit" value="Create" class="btn btn-success btn-lg" />
+                <div class="form-group d-flex justify-content-between align-items-center">
+                    <a asp-action="UserEventList">
+                     <input  type="button" value="Go Back" class="btn btn-success btn-lg btn-light skip-button" style="margin-top:30px"/>
+                     </a>
+                    &nbsp;
+                    <input type="submit" value="Add Event" class="btn btn-success btn-lg submit-btn" />
+                   
                 </div>
             </form>
         </div>

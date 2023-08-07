@@ -14,3 +14,55 @@
 #partialModal{
     overflow:hidden;
 }
+
+#eventTypeTab{
+    margin:15px 0px;
+}
+
+
+#eventTypeTab .nav-item {
+        margin-right: 5px;
+    }
+    
+#eventTypeTab .nav-link {
+        color: #000 !important;
+        font-weight: 600;
+        border-radius: unset;
+    }
+
+#eventTypeTab .nav-link.active {
+        background: none;
+        color: #307c8f !important;
+       border-bottom: 1px solid #307c8f;
+    }
+
+.signup-page {
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+.signup-content {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 20px;
+}
+
+    .signup-content .signup-title {
+        margin-bottom: 30px;
+        color: #307c8f;
+    }
+
+.signup-content .signup-button {
+    background-color: #307c8f !important;
+    border:none !important;
+    width:50%;
+    border-radius:15px !important;
+}
+
+.signup-page .signup-back-link {
+    text-decoration: none;
+    margin-bottom:5px;
+    color:#000;
+}
+
+

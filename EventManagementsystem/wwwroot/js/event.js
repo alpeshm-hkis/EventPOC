@@ -1,6 +1,7 @@
 ﻿var EventId = 0;
+var _typ = '1';
 $(document).ready(function () {
-
+    tab_css();
 });
 
 function viewDetail(id) {
@@ -8,7 +9,7 @@ function viewDetail(id) {
     getEventById(id);
     EventId = id;
     $.ajax({
-        url: "home/GetEventComments",
+        url: "/home/GetEventComments",
         type: "POST",
         data: { id: id },
         success: function (dataResult) {
@@ -20,25 +21,28 @@ function viewDetail(id) {
 }
 
 function addComment() {
-    debugger
     var comment = $('#newComment').val();
-    EventId;
+    if (comment.trim() == '') {
+        alert("Please add comment");
+        return false;
+    }
     $.ajax({
-        url: "home/AddEventComments",
+        url: "/home/AddEventComments",
         type: "POST",
-        data: { id: EventId, comment:comment },
+        data: { id: EventId, comment: comment },
         success: function (dataResult) {
             debugger
             $('#ulCommentList').append(`<div class="row d-flex justify-content-center p-1 col-lg-12">
-                <div class="col-md-8 col-lg-10">
-                    <div class="card shadow-0 border" style="background-color: #d8e9f1;">
-                        <div class="card-body p-4">
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    `+ comment +`
-                                </div>
+                <div class="col-md-8 col-lg-11"  style="border-bottom: 1px solid #c9c9c9;">
+                        <div class="">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h4>you</h4>
+                                <p class="m-0">Now</p>
                             </div>
-                        </div>
+                            <div class="my-2">
+                                `+ comment +`
+                            </div>
+                           
                     </div>
                 </div>
             </div>`);
@@ -52,31 +56,80 @@ function closeModal() {
 }
 
 function deleteDetail(id) {
-    $.ajax({
-        url: "DeleteEvent",
-        type: "POST",
-        data: { id: id },
-        success: function (dataResult) {
-        }
-    });
+    if (confirm("Are you want to delete this event?") == true) {
+        $.ajax({
+            url: "DeleteEvent",
+            type: "POST",
+            data: { id: id },
+            success: function (dataResult) {
+                window.location.href = "/event/UserEventList?type=" + 1;
+            }
+        });
+    }
 }
 
 function getEventById(id) {
     $.ajax({
-        url: 'event/GetEventById',
+        url: '/home/GetEventById',
         type: 'GET',
         data: { id: id },
         success: function (data) {
-            debugger
             if (data != undefined) {
                 $('#eventtitle').text(data.title);
-                $('#eventdescription').val();
-                $('#eventauther').val();
-                $('#eventdate').val();
+                $('#eventdescription').text(data.description);
+                $('#eventauther').text(data.author);
+                $('#eventdate').text(data.startDate);
 
             } else {
 
             }
         }
     });
+}
+
+function onselectionchangeEvent(type) {
+    $.ajax({
+        url: '/home/Index',
+        type: 'GET',
+        data: { type: type },
+        success: function (data) {
+            debugger
+            if (data != undefined) {
+                window.location.href = "/home/Index?type=" + type;
+                tab_css();
+            } 
+        }
+    });
+}
+
+function onPrivateselectionchangeEvent(type) {
+    $.ajax({
+        url: 'Index',
+        type: 'GET',
+        data: { type: type },
+        success: function (data) {
+            debugger
+            if (data != undefined) {
+                window.location.href = "/event/UserEventList?type=" + type;
+                tab_css();
+            }
+        }
+    });
+}
+
+function editEventDetails(id) {
+    window.location.href = "/event/Edit?id=" + id;
+}
+
+function tab_css() {
+    debugger
+    var path = window.location.href.split('=');
+    if (path[1] == '1') {
+        $('#profile-tab').removeClass('active');
+        $('#home-tab').addClass('active');
+    }
+    if (path[1] == '2') {
+        $('#profile-tab').addClass('active');
+        $('#home-tab').removeClass('active');
+    }
 }

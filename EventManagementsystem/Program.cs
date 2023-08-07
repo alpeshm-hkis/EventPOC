@@ -9,6 +9,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
 builder.Services.AddTransient<ILoginRepository, LoginRepository>();
@@ -26,9 +27,9 @@ builder.Services.AddAuthentication(options =>
     o.TokenValidationParameters = new TokenValidationParameters
     {
 
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ValidateLifetime = false,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ThisismySecretKey")),
         ValidateIssuerSigningKey = true
     };
@@ -38,7 +39,7 @@ builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -46,8 +47,8 @@ builder.Services.AddSession(options =>
 var app = builder.Build();
 app.UseSession(new SessionOptions()
 {
-    IdleTimeout = TimeSpan.FromMinutes(30),
-    IOTimeout = TimeSpan.FromSeconds(30),
+    IdleTimeout = TimeSpan.FromMinutes(60),
+    IOTimeout = TimeSpan.FromMinutes(60),
     Cookie = new CookieBuilder()
     {
         Expiration = TimeSpan.FromDays(1),
@@ -71,6 +72,7 @@ app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

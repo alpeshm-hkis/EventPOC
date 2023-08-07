@@ -27,9 +27,14 @@ namespace EventManagementsystem.Controllers
             _configuration = configuration;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string type)
         {
-            List<EventDetails> evenList =_eventDetailsService.GetEventDetailsList(1,1,0);
+            if (type == null)
+            {
+                type = "1";
+            }
+            List <EventDetails> evenList = new List<EventDetails> ();
+            evenList =_eventDetailsService.GetEventDetailsList(1,Convert.ToInt32(type),0);
             return View(evenList);
         }
 
@@ -52,7 +57,19 @@ namespace EventManagementsystem.Controllers
         public IActionResult RegisterUser(UserDetails user)
         {
             _loginDetailsService.SaveUserDetails(user);
-            return View();
+            var list = _loginDetailsService.GetLoginDetailByEmail(user.Email, user.Password);
+            var token = GenerateJSONWebToken(user.Email, user.Password);
+            var id = list.UserId;
+            var response = new
+            {
+                Id = id,
+                Token = token
+            };
+            HttpContext.Session.SetString("token", token.ToString());
+            HttpContext.Session.SetString("UserId", list.UserId.ToString());
+            HttpContext.Session.SetString("user_name", list.FirstName.ToString() + " " + list.LastName.ToString());
+            HttpContext.Session.SetString("Email", list.Email.ToString());
+            return RedirectToAction("UserEventList", "event", new { type = 1 });
         }
 
         [HttpGet]
@@ -120,8 +137,13 @@ namespace EventManagementsystem.Controllers
         public async Task<IActionResult> AddEventComments(string id ,string comment)
         {
             try
-            {                
-                _eventDetailsService.AddEventComments(id, comment);
+            {
+                var userId = HttpContext.Session.GetString("UserId");
+                if (userId == null)
+                {
+                    userId = "0";
+                }
+                _eventDetailsService.AddEventComments(id, comment, Convert.ToInt32(userId));
                 return Ok();
             }
             catch (Exception e)
@@ -129,7 +151,25 @@ namespace EventManagementsystem.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        public IActionResult GetEventById(string id)
+        {
+            EventDetails evenData = new EventDetails();
+            evenData = _eventDetailsService.GetEventDetailById(Convert.ToInt32(id));
+            return Ok(evenData);
+        }
+        [HttpGet]
+        public async Task<IActionResult> LogOff()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                return RedirectToAction("Index", "home");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         private string GenerateJSONWebToken(string email, string password)
         {
             var securityKey = Encoding.ASCII.GetBytes("ThisismySecretKeyusingforgeneratetoken");

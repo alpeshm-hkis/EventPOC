@@ -14,7 +14,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: Verdana !important;
 }
 
 .hide{
@@ -36,3 +37,138 @@ body {
 .container-fluid {
     margin-left: 10px;
 }
+#eventTypeTab {
+    margin: 15px 0px;
+}
+
+
+    #eventTypeTab .nav-item {
+        margin-right: 5px;
+    }
+
+    #eventTypeTab .nav-link {
+        color: #000 !important;
+        font-weight: 600;
+        border-radius: unset;
+    }
+
+        #eventTypeTab .nav-link.active {
+            background: none;
+            color: #307c8f !important;
+            border-bottom: 1px solid #307c8f;
+        }
+
+.signup-page, .login-page {
+    display: flex;
+    min-height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-content, .login-content {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 20px;
+    height:100%;
+}
+
+    .signup-content .signup-title, .login-content .login-title, .add-event-container .add-title {
+        margin-bottom: 30px;
+        color: #307c8f;
+    }
+
+    .signup-content .signup-button, .login-content .login-button, .add-event-container .submit-btn {
+        background-color: #307c8f !important;
+        border: none !important;
+        width: 50%;
+        border-radius: 10px !important;
+        cursor: pointer;
+    }
+
+        .signup-content .signup-button:focus, .login-content .login-button:focus, .add-event-container .submit-btn:focus{
+            box-shadow: none;
+        }
+
+ .signup-back-link {
+    text-decoration: none;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #307c8f;
+    color: #307c8f;
+    font-weight: 600;
+}
+
+    .signup-back-link:hover {
+        color: #307c8fe0;
+    }
+    .signup-content .form-control:focus {
+        border-color: #000;
+        box-shadow: none;
+    }
+
+.table {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+thead{
+background-color: #307c8f;
+color:#fff;
+}
+
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #fff !important;
+    --bs-table-accent-bg: #fff !important;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+.add-event-container .event {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    background-color:transparent;
+}
+
+.add-event-container .submit-btn{
+    margin-top:30px;
+}
+
+.modal-header .btn.btn-close {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+    .modal-header .btn.btn-close:focus-visible, .modal-header .btn.btn-close:focus {
+        outline: none;
+        border: none;
+        box-shadow: unset;
+    }
+
+.skip-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+.skip-button {
+    font-size: 15px;
+    color: #307c8f !important;
+}
+.add-event-btn {
+    float: right;
+    border: 1px solid #307c8f;
+    padding: 5px 11px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+    .add-event-btn a, .add-event-btn a:hover{
+        text-decoration: none !important;
+    }
+
+        .add-event-btn:hover {
+          
+            border: 1px solid #307c8f;
+            background-color: #307c8f;
+        }
+            .add-event-btn:hover a {
+                color: #fff;
+            }

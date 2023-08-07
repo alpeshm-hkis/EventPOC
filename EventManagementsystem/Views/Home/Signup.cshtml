@@ -8,21 +8,21 @@
 
 
 <div>
-    <div>
-        <h1>Signup</h1>
+    <div style="margin-bottom: 30px;">
+        <a asp-action="Index" class="signup-back-link">Event List</a>
     </div>
     <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-    <div>
-        <section>
-            <div class="container-fluid h-custom">
+        <section class="signup-page">
+            <div class=" h-custom signup-content">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-md-9 col-lg-6 col-xl-5">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                              class="img-fluid" alt="Sample image">
                     </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 cards">
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <div>
+                            <h1 class="signup-title">Signup</h1>
+                        </div>
                         <form asp-action="RegisterUser" method="post" asp-controller="home">
                             <div class="form-outline mb-4 hide">
                                 <label asp-for="UserId" class="form-label fw-bold"></label>
@@ -33,8 +33,8 @@
                                 <div class="col-md-6 mb-3">
 
                                     <div class="form-outline">
-                                        <label asp-for="FirstName" class="form-label fw-bold"></label>
-                                        <input asp-for="FirstName" id="firstname" class="form-control form-control-lg" placeholder="Enter FirstName" />
+                                        <label asp-for="FirstName" class="form-label fw-bold">First Name</label>
+                                        <input asp-for="FirstName" id="firstname" class="form-control form-control-md" placeholder="First Name" />
                                         <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
 
@@ -42,8 +42,8 @@
                                 <div class="col-md-6 mb-3">
 
                                     <div class="form-outline">
-                                        <label asp-for="LastName" class="form-label fw-bold"></label>
-                                        <input asp-for="LastName" id="lastname" class="form-control form-control-lg" placeholder="Enter FirstName" />
+                                        <label asp-for="LastName" class="form-label fw-bold">Last Name</label>
+                                        <input asp-for="LastName" id="lastname" class="form-control form-control-md" placeholder="Last Name" />
                                         <span asp-validation-for="LastName" class="text-danger"></span>
                                     </div>
 
@@ -52,19 +52,19 @@
 
                             <div class="form-outline mb-3">
                                 <label asp-for="Email" class="form-label fw-bold"></label>
-                                <input asp-for="Email" id="email" class="form-control form-control-lg" placeholder="Enter Email" />
+                                <input asp-for="Email" id="email" class="form-control form-control-md" placeholder="Email" />
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
 
                             <div class="form-outline mb-3">
                                 <label asp-for="Password" class="form-label fw-bold"></label>
-                                <input asp-for="Password" id="password" class="form-control form-control-lg" maxlength="10" placeholder="Enter Password" />
+                                <input asp-for="Password" id="password" type="password" class="form-control form-control-md" minlength="1" placeholder="Password" />
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label asp-for="Mobile" class="form-label fw-bold"></label>
-                                <input asp-for="Mobile" id="mobile" class="form-control form-control-lg" placeholder="Enter Mobile No." />
+                                <input asp-for="Mobile" id="mobile" class="form-control form-control-md" maxlength="10" placeholder="Mobile No." />
                                 <span asp-validation-for="Mobile" class="text-danger"></span>
                             </div>
 
@@ -79,11 +79,10 @@
                             </div>
 
                             <div class="text-center text-lg-start mt-4 pt-2  d-flex flex-column align-items-center">
-                                <input type="button" value="Create" onclick="emailValidate()" class="btn btn-primary btn-lg"
-                                        style="padding-left: 2.5rem; padding-right: 2.5rem;" />
+                                <input type="button" value="Create" onclick="emailValidate()" class="signup-button btn btn-primary btn-lg" />
                                 <p class="small fw-bold mt-2 pt-1 mb-0">
-                                    Already have an account? <a asp-action="Login"
-                                                              class="link-danger">Login</a>
+                                    Already have an account? <a asp-action="Login" style="color: #307c8f"
+                                                                class="">Login</a>
                                 </p>
                             </div>
 
@@ -99,62 +98,7 @@
 
 
 
-@*<h1>Signup</h1>
 
-<h4>UserDetails</h4>
-<hr />
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="RegisterUser" method="post" asp-controller="home">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group hide">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" id="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" id="firstname" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" id="lastname" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" id="email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" id="password" class="form-control" maxlength="10" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Mobile" class="control-label"></label>
-                <input asp-for="Mobile" id="mobile" class="form-control" />
-                <span asp-validation-for="Mobile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input class="form-check-input" type="radio" name="Gender" id="femaleGender"
-                       value="Female" checked />
-                <label class="form-check-label" for="femaleGender">Female</label>
-                <input class="form-check-input" type="radio" name="Gender" id="maleGender"
-                       value="Male" />
-                <label class="form-check-label" for="maleGender">Male</label>
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="button" value="Create" onclick="emailValidate()" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>*@
 
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
