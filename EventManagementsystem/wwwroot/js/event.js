@@ -4,8 +4,8 @@ $(document).ready(function () {
     tab_css();
 });
 
-function viewDetail(id) {
-    debugger
+// Call when user want to see event full detail
+function viewDetail(id) {    
     getEventById(id);
     EventId = id;
     $.ajax({
@@ -19,7 +19,7 @@ function viewDetail(id) {
     });
 
 }
-
+// Call When User add new comment in comment box
 function addComment() {
     var comment = $('#newComment').val();
     if (comment.trim() == '') {
@@ -31,7 +31,7 @@ function addComment() {
         type: "POST",
         data: { id: EventId, comment: comment },
         success: function (dataResult) {
-            debugger
+            // After add new comment show comment in model box
             $('#ulCommentList').append(`<div class="row d-flex justify-content-center p-1 col-lg-12">
                 <div class="col-md-8 col-lg-11"  style="border-bottom: 1px solid #c9c9c9;">
                         <div class="">
@@ -51,12 +51,15 @@ function addComment() {
     });
 }
 
+// Call when event view model closed
 function closeModal() {
     $("#partialModal").modal('hide');
 }
 
+// Call when User want to delete event
 function deleteDetail(id) {
-    if (confirm("Are you want to delete this event?") == true) {
+    // Show confirm box for delete event
+    if (confirm("Are you sure you want to delete this event?") == true) {
         $.ajax({
             url: "DeleteEvent",
             type: "POST",
@@ -67,18 +70,20 @@ function deleteDetail(id) {
         });
     }
 }
-
+// Get Event detail By id
 function getEventById(id) {
     $.ajax({
         url: '/home/GetEventById',
         type: 'GET',
         data: { id: id },
         success: function (data) {
+            
             if (data != undefined) {
+                data.startDate = new Date(data.startDate);
                 $('#eventtitle').text(data.title);
                 $('#eventdescription').text(data.description);
                 $('#eventauther').text(data.author);
-                $('#eventdate').text(data.startDate);
+                $('#eventdate').text(data.startDate.toLocaleString());
 
             } else {
 
@@ -87,13 +92,15 @@ function getEventById(id) {
     });
 }
 
+// event filtter by passed or uppcomming event
+
 function onselectionchangeEvent(type) {
     $.ajax({
         url: '/home/Index',
         type: 'GET',
         data: { type: type },
         success: function (data) {
-            debugger
+            
             if (data != undefined) {
                 window.location.href = "/home/Index?type=" + type;
                 tab_css();
@@ -102,13 +109,15 @@ function onselectionchangeEvent(type) {
     });
 }
 
+// event filtter by passed or uppcomming event
+
 function onPrivateselectionchangeEvent(type) {
     $.ajax({
         url: 'Index',
         type: 'GET',
         data: { type: type },
         success: function (data) {
-            debugger
+            
             if (data != undefined) {
                 window.location.href = "/event/UserEventList?type=" + type;
                 tab_css();
@@ -117,12 +126,17 @@ function onPrivateselectionchangeEvent(type) {
     });
 }
 
+// Call when User click on edit event button
+// Redirect to edit form view page
+
 function editEventDetails(id) {
     window.location.href = "/event/Edit?id=" + id;
 }
 
+// tab css apply when click on tab upcomming and passed
+
 function tab_css() {
-    debugger
+    
     var path = window.location.href.split('=');
     if (path[1] == '1') {
         $('#profile-tab').removeClass('active');

@@ -26,7 +26,11 @@ namespace EventManagementsystem.Controllers
             _eventDetailsService = eventDetailsService;
             _configuration = configuration;
         }
-
+        /// <summary>
+        /// Main Home index page
+        /// </summary>
+        /// <param name="type">1 or 0</param>
+        /// <returns>public event details list</returns>
         public IActionResult Index(string type)
         {
             if (type == null)
@@ -69,7 +73,7 @@ namespace EventManagementsystem.Controllers
             HttpContext.Session.SetString("UserId", list.UserId.ToString());
             HttpContext.Session.SetString("user_name", list.FirstName.ToString() + " " + list.LastName.ToString());
             HttpContext.Session.SetString("Email", list.Email.ToString());
-            return RedirectToAction("UserEventList", "event", new { type = 1 });
+            return RedirectToAction("UserEventList", "Event");
         }
 
         [HttpGet]
@@ -85,6 +89,7 @@ namespace EventManagementsystem.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetLoginDetailByEmail(string email, string password)
@@ -151,12 +156,14 @@ namespace EventManagementsystem.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         public IActionResult GetEventById(string id)
         {
             EventDetails evenData = new EventDetails();
             evenData = _eventDetailsService.GetEventDetailById(Convert.ToInt32(id));
             return Ok(evenData);
         }
+
         [HttpGet]
         public async Task<IActionResult> LogOff()
         {
@@ -170,6 +177,7 @@ namespace EventManagementsystem.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         private string GenerateJSONWebToken(string email, string password)
         {
             var securityKey = Encoding.ASCII.GetBytes("ThisismySecretKeyusingforgeneratetoken");
@@ -196,6 +204,7 @@ namespace EventManagementsystem.Controllers
         {
             return View(new Models.ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         [HttpGet]
         public async Task<IActionResult> UserModel()
         {

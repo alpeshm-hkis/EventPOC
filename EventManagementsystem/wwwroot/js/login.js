@@ -1,6 +1,15 @@
 ﻿$(document).ready(function () {
+    $(document).on("keyup", function (e) {
 
+        if (e.which == 13) // the enter key ascii code
+        {
+            LoginUser();
+        }
+
+    });
 });
+
+// Get User default model for Create User form
 
 function getUserModel() {
     $.ajax({
@@ -9,10 +18,13 @@ function getUserModel() {
         async: false,
         cache: false,
         success: function (dataResult) {
+            // Call register user method for register user data
             registerUser(dataResult);        
         }
     });
 }
+
+// Add new User Detail in DB
 
 function registerUser(user) {
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -20,10 +32,10 @@ function registerUser(user) {
     user.lastName = $('#lastname').val();
     user.email = $('#email').val();
     user.password = $('#password').val();
-    user.mobile = $('#mobile').val();
-    user.gender = $('input[name=Gender]:checked').val();
+
+    // Validation for User detail
     var validationMsg = "";
-    debugger;
+    ;
     if (user.firstName == "") {
         validationMsg = "First Name";
     }
@@ -45,12 +57,6 @@ function registerUser(user) {
         }
         validationMsg += "Password";
     }
-    if (user.mobile == '' || user.mobile.length < 10 || user.mobile.length > 10) {
-        if (validationMsg.length > 1) {
-            validationMsg += ", ";
-        }
-        validationMsg += "Mobile";
-    }
     if (validationMsg.length > 1) {
         alert("Please enter valid " + validationMsg + ". this all are required fields");
         return false;
@@ -59,14 +65,15 @@ function registerUser(user) {
         url: "RegisterUser",
         type: "POST",
         data: { user: user },
-        dataType: "json",
-        cache: false,
         success: function (dataResult) {
+            alert("User Created successfully!");
             window.location.href = "/event/UserEventList?type=" + 1;
         }
     });
 }
 
+
+// Call Email validation method for validate dublicate email
 function emailValidate() {
     var email = $('#email').val();
     $.ajax({
@@ -77,14 +84,18 @@ function emailValidate() {
         },
         cache: false,
         success: function (dataResult) {
+            // If email is already exist then return false
             if (dataResult == true) {
-                alert("This email address is already exist! Try another email.");
+                alert("This email address is already exist!Please try another email.");
                 return false;
             }
+            
             getUserModel();
         }
     });
 }
+
+// Call Login method for login user
 
 function LoginUser() {
     var email = $('#email').val();
@@ -94,11 +105,11 @@ function LoginUser() {
         type: 'GET',
         data: { email: email, password: password },
         success: function (data) {
-            debugger
+            
             if (data != undefined) {
                 window.location.href = "/event/UserEventList?type="+1;
             } else {
-                alert("enter valid email and password")
+                alert("please enter valid email and password")
             }
         }
     });

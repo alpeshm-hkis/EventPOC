@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 // Add services to the container.
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();

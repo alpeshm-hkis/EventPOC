@@ -51,9 +51,7 @@ namespace EventManagementSystem.Repository
             parameters.Add("@firstname", userDetails.FirstName, DbType.String, ParameterDirection.Input);
             parameters.Add("@lastname", userDetails.LastName, DbType.String, ParameterDirection.Input);
             parameters.Add("@email", userDetails.Email, DbType.String, ParameterDirection.Input);
-            parameters.Add("@password", userDetails.Password, DbType.String, ParameterDirection.Input);           
-            parameters.Add("@gender", userDetails.Gender, DbType.String, ParameterDirection.Input);
-            parameters.Add("@mobile", userDetails.Mobile, DbType.String, ParameterDirection.Input);
+            parameters.Add("@password", userDetails.Password, DbType.String, ParameterDirection.Input); 
             using (IDbConnection connection = GetDbConnection())
             {
                 SqlMapper.Query<dynamic>(connection, "save_userdetails ", parameters, commandType: CommandType.StoredProcedure);

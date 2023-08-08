@@ -15,11 +15,13 @@ namespace EventManagementsystem.Controllers
             _logger = logger;
             _eventDetailsService = eventDetailsService;
         }
+
         public IActionResult Index()
         {
             // Add Event 
             return View();
         }
+
         public IActionResult UserEventList(string type)
         {
             if (type == null)
@@ -31,6 +33,7 @@ namespace EventManagementsystem.Controllers
             evenList = _eventDetailsService.GetEventDetailsList(0, Convert.ToInt32(type), Convert.ToInt32(userId));
             return View(evenList);
         }
+
         public IActionResult AddEvent(EventDetails eventData)
         {
             eventData.UserId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
@@ -40,6 +43,7 @@ namespace EventManagementsystem.Controllers
             evenList = _eventDetailsService.GetEventDetailsList(0, Convert.ToInt32(1), Convert.ToInt32(userId));
             return RedirectToAction("UserEventList");
         }
+
         public IActionResult DeleteEvent(string id)
         {
             _eventDetailsService.DeleteEvent(Convert.ToInt32(id));
@@ -48,12 +52,14 @@ namespace EventManagementsystem.Controllers
             evenList = _eventDetailsService.GetEventDetailsList(0, Convert.ToInt32(0), Convert.ToInt32(userId));
             return RedirectToAction("UserEventList");
         }
+
         public IActionResult Edit(string id)
         {
             EventDetails evenData = new EventDetails();
             evenData = _eventDetailsService.GetEventDetailById(Convert.ToInt32(id));
             return View(evenData);
         }
+
         public IActionResult GetEventById(string id)
         {
             EventDetails evenData = new EventDetails();

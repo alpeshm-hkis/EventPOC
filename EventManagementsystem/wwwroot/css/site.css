@@ -172,3 +172,11 @@ td {
             .add-event-btn:hover a {
                 color: #fff;
             }
+
+.btn{
+    cursor:pointer;
+}
+
+.label {
+    font-weight: 500!important;
+}

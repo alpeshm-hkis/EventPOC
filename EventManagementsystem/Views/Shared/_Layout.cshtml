@@ -18,7 +18,15 @@
             debugger
             var path = window.location.pathname.split('/');
             if (path[0] == 'event' || path[1] == 'event'|| path[0] == 'Event' || path[1] == 'Event') {
+                $('#navbarButtonLogin').addClass('hide');
                 $('#navbarButton').removeClass('hide');
+            }else {
+                $('#navbarButton').addClass('hide');
+                 $('#navbarButtonLogin').removeClass('hide');
+            }
+            if (window.location.pathname == '/home/login') {
+                $('#navbarButton').addClass('hide');
+                 $('#navbarButtonLogin').addClass('hide');
             }
 
         });
@@ -43,6 +51,12 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LogOff">Logout</a>
                         </li>
                     </ul>
+                     <ul id="navbarButtonLogin" style="float:right;" class="navbar-nav flex-grow-1 hide">
+                        
+                        <li class="nav-item ms-auto" >
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">LogIn</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -54,8 +68,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - EventManagementsystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container" style="text-align:center">
+            &copy; 2023 - Event Management System
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

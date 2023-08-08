@@ -7,7 +7,7 @@ namespace EventManagementSystem.Models
         public int EventId { get; set; }
         [Required(ErrorMessage = "Title is required")]
         public string Title { get;set; }
-        [Required(ErrorMessage = "StartDate is required")]
+        [Required(ErrorMessage = "Event Start Date is required")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }

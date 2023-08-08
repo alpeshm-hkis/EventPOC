@@ -9,24 +9,24 @@
     <a asp-action="Login">Add Event</a>
 </div>
 <div>
-    <!-- <select id="eventType" onchange="onselectionchangeEvent()">
-         <option value="1" selected>Upcoming </option>
-         <option value="2">Passed</option>
-     </select>-->
     <ul class="nav nav-pills" id="eventTypeTab" role="tablist">
         <li class="nav-item">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" type="button" role="tab" aria-controls="upcoming" aria-selected="true" onclick="onselectionchangeEvent('1')">Upcoming</button>
+            <button class="nav-link btn active" id="home-tab" data-bs-toggle="tab" type="button" role="tab" aria-controls="upcoming" aria-selected="true" onclick="onselectionchangeEvent('1')">Upcoming</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" type="button" role="tab" aria-controls="passed" aria-selected="false" onclick="onselectionchangeEvent('2')">Passed</button>
+            <button class="nav-link btn" id="profile-tab" data-bs-toggle="tab" type="button" role="tab" aria-controls="passed" aria-selected="false" onclick="onselectionchangeEvent('2')">Passed</button>
         </li>
     </ul>
 </div>
 <table class="table  table-striped ">
     <thead>
         <tr>
+            <th>Sr.No</th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                Start Date
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
@@ -37,20 +37,22 @@
             <th>
                 @Html.DisplayNameFor(model => model.Author)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @if (Model.Count() > 0)
         {
+            int i = 1;
             @foreach (var item in Model)
-            {
+            {                 
                 <tr>
+                    <td>@i</td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Duration)
@@ -60,14 +62,12 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Author)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        <input type="button" class="btn-secondary border-0 rounded px-3 py-2" onclick="viewDetail(@item.EventId)" value="View" />
+                    </td>                   
+                    <td style="text-align:center;">
+                        <input type="button" class="btn-secondary btn border-0 rounded px-3 py-2" onclick="viewDetail(@item.EventId)" value="View Details" />
                     </td>
                 </tr>
+                i++;
             }
         }
         else
@@ -85,42 +85,37 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                @*
-                <h5 class="modal-title">Customer Details Form</h5>
-                <button type="button" class="close" data-dismiss="modal"  aria-label="Close">
-
-                </button>*@
-                <h3 class="modal-title">Event Details</h3>
+                <h3 class="modal-title">Event Detail</h3>
                 <button type="button" class="btn btn-close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="container  card col-md-11" style="border: none; margin-top: 20px;">
+            <div class="container card col-md-12" style="margin-top: 30px; border: none;">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <div class="form-outline">
+                        <div class="form-outline d-flex">
                             <label class="form-label fw-bold">Title: </label>
-                            <label class="form-label fw-bold" id="eventtitle"></label>
+                            <p class="form-label ps-1 " id="eventtitle"></p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-outline">
+                        <div class="form-outline d-flex">
                             <label class="form-label fw-bold">Description: </label>
-                            <label class="form-label fw-bold" id="eventdescription"></label>
+                            <p class="form-label ps-1" id="eventdescription"></p>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <div class="form-outline">
+                        <div class="form-outline d-flex">
                             <label class="form-label fw-bold">Author: </label>
-                            <label class="form-label fw-bold" id="eventauther"></label>
+                            <p class="form-label ps-1" id="eventauther"></p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-outline">
-                            <label class="form-label fw-bold">Start Dates: </label>
-                            <label class="form-label fw-bold" id="eventdate"></label>
+                        <div class="form-outline d-flex">
+                            <label class="form-label fw-bold">Start Date: </label>
+                            <p class="form-label ps-1" id="eventdate"></p>
                         </div>
                     </div>
                 </div>
@@ -130,6 +125,7 @@
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">

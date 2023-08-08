@@ -22,8 +22,12 @@
 <table class="table table-striped">
     <thead>
         <tr>
+             <th>Sr.No</th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                Start Date
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
@@ -34,20 +38,23 @@
             <th>
                 @Html.DisplayNameFor(model => model.Author)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
         @if (Model.Count() > 0)
         {
+            var i = 1;
             @foreach (var item in Model)
         {
             <tr>
+                <td>@i</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Duration)
@@ -58,15 +65,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    <input type="button" class="btn-secondary border-0 rounded px-3 py-2" onclick="viewDetail(@item.EventId)" value="View" />
-                    <input type="button" class="btn-danger border-0 rounded px-3 py-2"  onclick="deleteDetail(@item.EventId)" value="Delete" />
-                   <input type="button" class="btn-primary border-0 rounded px-3 py-2"  onclick="editEventDetails(@item.EventId)" value="Edit" />
+                
+                <td style="text-align:center;">
+                    <input type="button" class="btn-secondary border-0 rounded px-3 py-2" onclick="viewDetail(@item.EventId)" value="View Details" />
+                    <input type="button" class="btn-primary border-0 rounded px-3 py-2"  onclick="editEventDetails(@item.EventId)" value="Edit" />
+                    <input type="button" class="btn-danger border-0 rounded px-3 py-2"  onclick="deleteDetail(@item.EventId)" value="Delete" />                   
                 </td>
                 </tr>
+                i++;
             }
 
         }
@@ -82,7 +88,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Event Details</h3>
+                <h3 class="modal-title">Event Detail</h3>
                 <button type="button" class="btn btn-close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -111,7 +117,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-outline d-flex">
-                            <label class="form-label fw-bold">Start Dates: </label>
+                            <label class="form-label fw-bold">Start Date: </label>
                             <p class="form-label ps-1" id="eventdate"></p>
                         </div>
                     </div>

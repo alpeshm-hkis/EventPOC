@@ -21,19 +21,19 @@
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
-                    <label asp-for="Description" class="form-label fw-bold"></label>
-                    <textarea asp-for="Description" class="form-control form-control-md" placeholder="Enter Description"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <label class="form-label fw-bold">Event Start Date</label>
+                    <input asp-for="StartDate" type="datetime-local" class="form-control form-control-md" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
                     <label asp-for="Duration" class="form-label fw-bold"></label>
-                    <input asp-for="Duration" class="form-control form-control-md" placeholder="Enter Duration" />
+                    <input asp-for="Duration" type="number" class="form-control form-control-md" placeholder="Enter Duration" />
                     <span asp-validation-for="Duration" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label fw-bold">DateTime</label>
-                    <input asp-for="StartDate" type="datetime-local" class="form-control form-control-md" />
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                    <label asp-for="Description" class="form-label fw-bold"></label>
+                    <textarea asp-for="Description" class="form-control form-control-md" placeholder="Enter Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
                     <label asp-for="Location" class="form-label fw-bold">Location</label>
@@ -50,7 +50,7 @@
                      <input  type="button" value="Go Back" class="btn btn-success btn-lg btn-light skip-button" style="margin-top:30px"/>
                      </a>
                     &nbsp;
-                     <input type="submit" value="Edit Event" class="btn btn-success btn-lg submit-btn" />
+                     <input type="submit" value="Update" class="btn btn-success btn-lg submit-btn" />
                    
                 </div>
             </form>
