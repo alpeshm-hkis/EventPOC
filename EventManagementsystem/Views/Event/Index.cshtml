@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-outline mb-4">
                     <label asp-for="Duration" class="form-label fw-bold"></label>
-                    <input asp-for="Duration" type="number" class="form-control form-control-md" placeholder="Enter Duration" />
+                    <input asp-for="Duration" type="number" class="form-control form-control-md" onkeypress="return checkOnlyDigits(event)" placeholder="Enter Duration" />
                     <span asp-validation-for="Duration" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">

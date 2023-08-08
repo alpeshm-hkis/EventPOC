@@ -80,10 +80,11 @@ function getEventById(id) {
             
             if (data != undefined) {
                 data.startDate = new Date(data.startDate);
+                var date = data.startDate.toLocaleString().split(',');
                 $('#eventtitle').text(data.title);
                 $('#eventdescription').text(data.description);
                 $('#eventauther').text(data.author);
-                $('#eventdate').text(data.startDate.toLocaleString());
+                $('#eventdate').text(date[0] + ' ' + date[1]);
 
             } else {
 
@@ -145,5 +146,15 @@ function tab_css() {
     if (path[1] == '2') {
         $('#profile-tab').addClass('active');
         $('#home-tab').removeClass('active');
+    }
+}
+
+function checkOnlyDigits(e) {
+    e = e ? e : window.event;
+    var charCode = e.which ? e.which : e.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    } else {
+        return true;
     }
 }
