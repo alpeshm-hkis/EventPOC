@@ -57,7 +57,13 @@ function registerUser(user) {
         validationMsg += "Password";
     }
     if (validationMsg.length > 1) {
-        alert("Please enter valid " + validationMsg + ". this all are required fields");
+        $('#confirm').modal("show");
+        $($($('#confirm').children()).children()).css('width', '600px');
+        $($($('#confirm').children()).children()).css('margin-left', '100px');
+        $('#contextMsg').text("Please enter valid " + validationMsg + ". this all are required fields.");
+        $("#success").on('click', function (e) {
+            $('#confirm').modal('hide');
+        });
         return false;
     }
     $.ajax({
@@ -68,10 +74,8 @@ function registerUser(user) {
             //If User succesfully Created
             if (dataResult != null) {
                 $('#confirm').modal("show");
-                $($('#contextMsg').parent()).prepend("<i class='bi bi-check-circle-fill' style='color: #ff0000; font-size: 60px;'></i>");
                 $('#contextMsg').text("User Created Successfully!");
                 $("#success").on('click', function (e) {
-                    $($('#contextMsg').parent()).first().remove();
                     window.location.href = "/event/UserEventList?type=" + 1;
                 });
             } else {
@@ -79,6 +83,7 @@ function registerUser(user) {
                 $('#contextMsg').text("User does not created!")
                 $("#success").on('click', function (e) {
                     $('#confirm').modal('hide');
+                    $($($('#confirm').children()).children()).removeAttr('style');
                 });
             }            
         }
@@ -102,7 +107,7 @@ function emailValidate() {
                 $('#confirm').modal("show");
                 $($($('#confirm').children()).children()).css('width', '600px');
                 $($($('#confirm').children()).children()).css('margin-left', '100px');
-                $('#contextMsg').text("This email address is already exist!Please try another email.");
+                $('#contextMsg').text("This email address is already exist! Please try another email.");
                 $("#success").on('click', function (e) {
                     $('#confirm').modal('hide');
                     $($($('#confirm').children()).children()).removeAttr('style');
