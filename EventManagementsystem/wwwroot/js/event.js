@@ -58,8 +58,9 @@ function closeModal() {
 
 // Call when User want to delete event
 function deleteDetail(id) {
-    // Show confirm box for delete event
-    if (confirm("Are you sure you want to delete this event?") == true) {
+    debugger;
+    $('#confirm').modal("show");
+    $("#delete").on('click', function (e) {
         $.ajax({
             url: "DeleteEvent",
             type: "POST",
@@ -68,7 +69,13 @@ function deleteDetail(id) {
                 window.location.href = "/event/UserEventList?type=" + 1;
             }
         });
-    }
+     });
+    $("#cancel").on('click', function (e) {
+        
+        $('#confirm').modal('hide');
+    });
+    // Show confirm box for delete event
+    
 }
 // Get Event detail By id
 function getEventById(id) {

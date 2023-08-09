@@ -1,16 +1,15 @@
 ﻿$(document).ready(function () {
     $(document).on("keyup", function (e) {
-
-        if (e.which == 13) // the enter key ascii code
-        {
-            LoginUser();
+        if (window.location.pathname == '/home/login') {
+            if (e.which == 13) // the enter key ascii code
+            {
+                LoginUser();
+            }
         }
-
     });
 });
 
 // Get User default model for Create User form
-
 function getUserModel() {
     $.ajax({
         url: "UserModel",
@@ -66,8 +65,21 @@ function registerUser(user) {
         type: "POST",
         data: { user: user },
         success: function (dataResult) {
-            alert("User Created successfully!");
-            window.location.href = "/event/UserEventList?type=" + 1;
+            //If User succesfully Created
+            if (dataResult != null) {
+                $('#confirm').modal("show");
+                $('#title').text("Success");
+                $('#contextMsg').text("User Created Successfully!")
+                $("#success").on('click', function (e) {
+                    window.location.href = "/event/UserEventList?type=" + 1;
+                });
+            } else {
+                $('#confirm').modal("show");
+                $('#title').text("Failed");
+                $('#contextMsg').text("User does not created!")
+                $("#success").on('click', function (e) {
+                });
+            }            
         }
     });
 }
@@ -96,7 +108,6 @@ function emailValidate() {
 }
 
 // Call Login method for login user
-
 function LoginUser() {
     var email = $('#email').val();
     var password = $('#password').val();

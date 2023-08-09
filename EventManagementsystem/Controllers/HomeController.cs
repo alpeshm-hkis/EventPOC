@@ -63,7 +63,7 @@ namespace EventManagementsystem.Controllers
             user.Password = EncodePasswordToBase64(user.Password);
             _loginDetailsService.SaveUserDetails(user);
             var list = _loginDetailsService.GetLoginDetailByEmail(user.Email, user.Password);
-            var token = GenerateJSONWebToken(user.Email, user.Password);
+            var token = GenerateJSONWebToken(list);
             var id = list.UserId;
             var response = new
             {
@@ -74,7 +74,7 @@ namespace EventManagementsystem.Controllers
             HttpContext.Session.SetString("UserId", list.UserId.ToString());
             HttpContext.Session.SetString("user_name", list.FirstName.ToString() + " " + list.LastName.ToString());
             HttpContext.Session.SetString("Email", list.Email.ToString());
-            return RedirectToAction("UserEventList", "Event");
+            return Ok(response);
         }
 
         [HttpGet]
@@ -100,7 +100,7 @@ namespace EventManagementsystem.Controllers
                 var list = _loginDetailsService.GetLoginDetailByEmail(email, EncodePasswordToBase64(password));
                 if (list != null)
                 {
-                    var tonen = GenerateJSONWebToken(email, password);
+                    var tonen = GenerateJSONWebToken(list);
                     var id = list.UserId;
                     var response = new
                     {
@@ -179,7 +179,7 @@ namespace EventManagementsystem.Controllers
             }
         }
 
-        private string GenerateJSONWebToken(string email, string password)
+        private string GenerateJSONWebToken(UserDetails list)
         {
             var securityKey = Encoding.ASCII.GetBytes("ThisismySecretKeyusingforgeneratetoken");
             var tokenDescription = new SecurityTokenDescriptor
@@ -188,7 +188,9 @@ namespace EventManagementsystem.Controllers
                 {
                     new Claim("key", "key"),
                     new Claim("value", "Value"),
-                    new Claim("DateOfJoing", DateTime.Now.ToString())
+                    new Claim("DateOfJoing", DateTime.Now.ToString()),
+                    new Claim(ClaimTypes.Email, list.Email),
+                    new Claim(ClaimTypes.GivenName, list.FirstName+" "+list.LastName)
                 }),
                 Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(securityKey), SecurityAlgorithms.HmacSha256Signature)

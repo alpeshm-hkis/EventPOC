@@ -65,3 +65,7 @@
 }
 
 
+#confirm .modal-content {
+    width: 400px;
+    margin-left: 200px;
+}

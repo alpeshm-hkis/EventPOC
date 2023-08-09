@@ -180,3 +180,8 @@ td {
 .label {
     font-weight: 500!important;
 }
+
+#confirm .modal-content {
+    width: 400px;
+    margin-left: 200px;
+}
