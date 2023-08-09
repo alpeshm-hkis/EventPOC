@@ -69,3 +69,7 @@
     width: 400px;
     margin-left: 200px;
 }
+
+.login .modal-body{
+    text-align:center;
+}

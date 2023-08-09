@@ -68,16 +68,17 @@ function registerUser(user) {
             //If User succesfully Created
             if (dataResult != null) {
                 $('#confirm').modal("show");
-                $('#title').text("Success");
-                $('#contextMsg').text("User Created Successfully!")
+                $($('#contextMsg').parent()).prepend("<i class='bi bi-check-circle-fill' style='color: #ff0000; font-size: 60px;'></i>");
+                $('#contextMsg').text("User Created Successfully!");
                 $("#success").on('click', function (e) {
+                    $($('#contextMsg').parent()).first().remove();
                     window.location.href = "/event/UserEventList?type=" + 1;
                 });
             } else {
                 $('#confirm').modal("show");
-                $('#title').text("Failed");
                 $('#contextMsg').text("User does not created!")
                 $("#success").on('click', function (e) {
+                    $('#confirm').modal('hide');
                 });
             }            
         }
@@ -98,11 +99,19 @@ function emailValidate() {
         success: function (dataResult) {
             // If email is already exist then return false
             if (dataResult == true) {
-                alert("This email address is already exist!Please try another email.");
-                return false;
-            }
+                $('#confirm').modal("show");
+                $($($('#confirm').children()).children()).css('width', '600px');
+                $($($('#confirm').children()).children()).css('margin-left', '100px');
+                $('#contextMsg').text("This email address is already exist!Please try another email.");
+                $("#success").on('click', function (e) {
+                    $('#confirm').modal('hide');
+                    $($($('#confirm').children()).children()).removeAttr('style');
+                    return false;
+                });
+            } else {
+                getUserModel();
+            }            
             
-            getUserModel();
         }
     });
 }
@@ -111,18 +120,31 @@ function emailValidate() {
 function LoginUser() {
     var email = $('#email').val();
     var password = $('#password').val();
-    $.ajax({
-        url: 'GetLoginDetailByEmail',
-        type: 'GET',
-        data: { email: email, password: password },
-        success: function (data) {
-            
-            if (data != undefined) {
-                window.location.href = "/event/UserEventList?type="+1;
-            } else {
-                alert("please enter valid email and password")
+    if (email.length > 0 && password.length > 0) {
+
+        $.ajax({
+            url: 'GetLoginDetailByEmail',
+            type: 'GET',
+            data: { email: email, password: password },
+            success: function (data) {
+                if (data != undefined) {
+                    window.location.href = "/event/UserEventList?type=" + 1;
+                } else {
+                    $('#confirm').modal("show");
+                    $('#contextMsg').text("please enter valid email and password.");
+                    $("#success").on('click', function (e) {
+                        $('#confirm').modal('hide');
+                        return false;
+                    });
+                }
             }
-        }
-    });
+        });
+    } else {
+        $('#confirm').modal("show");
+        $('#contextMsg').text("please enter valid email and password.");
+        $("#success").on('click', function (e) {
+            $('#confirm').modal('hide');
+        });
+    }
 }
 
